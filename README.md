@@ -20,5 +20,8 @@ Additionally, there's a Slack channel for EKS preview participants.  If you're a
 
 ## Setting up EKS
 
-There are some nice instructions for setting EKS up in the Getting Started guide here:
-file:///EKSDocs/userguide/getting-started.html
+There are some nice instructions for setting EKS up in the Getting Started guide under EKSDocs/userguide/getting-started.html
+
+## Deploying the Operator
+
+Once you have an EKS cluster deployed and a running kubectl, you're ready to deploy the Operator.  The instructions for deploying that are [here](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html).
