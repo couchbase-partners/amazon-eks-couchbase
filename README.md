@@ -41,3 +41,13 @@ Finally, you should be able to run your kubectl and see some nodes:
 ## Deploying the Operator
 
 Once you have an EKS cluster deployed and a running kubectl, you're ready to deploy the Operator.  The documentation on that is [here](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html).
+
+To create the deployment, run this:
+
+    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
+
+Now check that it worked:
+
+    kubectl get deployments
+
+If you give it a minute or two it should show "available."
