@@ -26,7 +26,7 @@ Follow through the getting started guide until you have a vpc, cluster and worke
 
 ## Validate EKS setup
 
-When that's all done, you should have a couple stacks deployed:
+When that's all done, you should have two stacks deployed [here](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2):
 
 ![cloudformation](/images/cloudformation.png)
 
@@ -34,7 +34,7 @@ You should also have a cluster in EKS [here](https://console.aws.amazon.com/eks/
 
 ![eks](/images/eks.png)
 
-Finally, you should be able to run your kubectl
+Finally, you should be able to run your kubectl and see some nodes:
 
 ![kubectl](/images/kubectl.png)
 
