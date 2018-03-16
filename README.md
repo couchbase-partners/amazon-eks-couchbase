@@ -1,3 +1,5 @@
+Currently this doesn't work!
+
 # amazon-eks-couchbase
 
 This is a walkthrough of setting the [Couchbase Operator](https://blog.couchbase.com/introducing-couchbase-operator/) up on [AWS EKS](https://aws.amazon.com/eks/).  
@@ -59,3 +61,10 @@ You should see something like this:
 ![createoperator](/images/createoperator.png)
 
 If you give it a minute or two it should show as available.
+
+## Debugging
+
+Some helpful commands:
+
+    kubectl get pods
+    kubectl describe pod <some pod>
