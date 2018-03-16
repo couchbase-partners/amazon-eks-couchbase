@@ -40,6 +40,8 @@ Finally, you should be able to run your kubectl and see some nodes:
 
 ![kubectl](/images/kubectl.png)
 
+Note: no one has adequately explained what the dns.yaml does.  It's not entirely clear it's required to set up the operator.
+
 ## Deploying the Operator
 
 Once you have an EKS cluster deployed and a running kubectl, you're ready to deploy the Operator.  The documentation on that is [here](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html).
@@ -51,5 +53,9 @@ To create the deployment, run this:
 Now check that it worked:
 
     kubectl get deployments
+
+You should see something like this:
+
+![createoperator](/images/createoperator.png)
 
 If you give it a minute or two it should show as available.
