@@ -22,9 +22,9 @@ Additionally, there's a Slack channel for EKS preview participants.  If you're a
 
 There are some nice instructions for setting EKS up in the Getting Started guide under EKSDocs/userguide/getting-started.html
 
-Follow through the getting started guide until you have a vpc, cluster and worker nodes deployed.  Also make sure to get the kubectl.  There is no need to complete Step 4, setting up the Guest Book sample application.  
+Follow through the getting started guide until you have a vpc, cluster and worker nodes deployed.  Also make sure to get the kubectl.  There is no need to complete Step 4, setting up the Guest Book sample application.
 
-One potential gotcha as of 3/15/18 - AWS seems to have just released Kubernetes 1.9.  The worker nodes will provision as 1.7 if you follow the doc.  Given that, we'd suggest just using 1.7 for now when you create the EKS cluster.
+Failing to get the latest doc can cause a world of pain as EKS seems to be evolving very quickly right now.
 
 ## Validate EKS setup
 
