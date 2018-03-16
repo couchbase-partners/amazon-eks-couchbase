@@ -20,7 +20,7 @@ Additionally, there's a Slack channel for EKS preview participants.  If you're a
 
 ## Set up EKS
 
-There are some nice instructions for setting EKS up in the Getting Started guide under EKSDocs/userguide/getting-started.html
+There are some nice instructions for setting EKS up in the Getting Started guide under `EKSDocs/userguide/getting-started.html`
 
 Follow through the getting started guide until you have a vpc, cluster and worker nodes deployed.  Also make sure to get the kubectl.  There is no need to complete Step 4, setting up the Guest Book sample application.
 
@@ -52,4 +52,4 @@ Now check that it worked:
 
     kubectl get deployments
 
-If you give it a minute or two it should show "available."
+If you give it a minute or two it should show as available.
