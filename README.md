@@ -10,7 +10,7 @@ EKS is in preview.  Your account must be whitelisted in order to use it.
 
 To get started, download the following documentation:
 
-    $ aws s3 cp s3://amazon-eks-docs/EKSDocs.zip .
+    aws s3 cp s3://amazon-eks-docs/EKSDocs.zip .
 
 The zip file is password protected.  If you're a Couchbase employee, ping Ben Lackey for the password.
 
