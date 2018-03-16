@@ -60,11 +60,16 @@ You should see something like this:
 
 ![createoperator](/images/createoperator.png)
 
-If you give it a minute or two it should show as available.
+If you give it a minute or two it should show as available (not working right now!)
 
 ## Debugging
 
 Some helpful commands:
 
+    kubectl get nodes
+    kubectl describe node <some node>
+    kubectl describe nodes
+
     kubectl get pods
     kubectl describe pod <some pod>
+    kubectl describe pods
