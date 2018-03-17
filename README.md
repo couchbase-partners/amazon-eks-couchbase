@@ -24,7 +24,7 @@ Additionally, there's a Slack channel for EKS preview participants.  If you're a
 
 There are some nice instructions for setting EKS up in the Getting Started guide under `EKSDocs/userguide/getting-started.html`
 
-Follow through the getting started guide until you have a vpc, cluster and worker nodes deployed.  Also make sure to get the kubectl.  There is no need to complete Step 4, setting up the Guest Book sample application.
+Follow through the getting started guide until you have a vpc, cluster and worker nodes deployed.  Also make sure to get the kubectl.  Don't deploy the DNS add on as that seems to cause problems.  Similarly, there is no need to complete Step 4, setting up the Guest Book sample application.
 
 Failing to get the latest doc can cause a world of pain as EKS seems to be evolving very quickly right now.
 
@@ -42,22 +42,48 @@ Finally, you should be able to run your kubectl and see some nodes:
 
 ![kubectl](/images/kubectl.png)
 
-Note: no one has adequately explained what the dns.yaml does.  It's not entirely clear it's required to set up the operator.
-
 ## Deploying the Operator
 
 Once you have an EKS cluster deployed and a running kubectl, you're ready to deploy the Operator.  The documentation on that is [here](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html).
 
-To create the deployment, run this:
+To create the deployment and check it deployed, run this:
 
     kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
-
-Now check that it worked:
-
     kubectl get deployments
 
 You should see something like this:
 
-![createoperator](/images/createoperator.png)
+![operatordeployed](/images/operatordeployed.png)
 
-If you give it a minute or two it should show as available (not working right now!)
+## Deploying a Couchbase Cluster
+
+We're there!  Time to get a live cluster.  Run this:
+
+    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/secret.yaml
+    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/couchbase-cluster.yaml
+
+That should give this:
+
+![couchbasecreated](/images/couchbasecreated.png)
+
+You can view the Couchbase and operator pods by running:
+
+    kubectl get pods
+
+## Accessing the Couchbase Web UI
+
+You've now got a cluster.  But to use it you probably want to set up port forwarding.  To do that run:
+
+    kubectl port-forward cb-example-0000 8091:8091
+
+Leave that command running:
+
+![portforward](/images/portforward.png)
+
+Now open up a browser to http://localhost:8091
+
+![loginscreen](/images/loginscreen.png)
+
+The username is `Administrator` and password is `password`.  And now you're in!
+
+![webui](/images/webui.png)
