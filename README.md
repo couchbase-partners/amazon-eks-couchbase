@@ -72,4 +72,4 @@ You should see something like this:
 
 ![operatordeployed](/images/operatordeployed.png)
 
-Currently the operator never achieves "available" status.  We're working with AWS to understand why.  For now the tutorial ends here.
+Currently the operator never achieves "available" status.  This is because of some required features not yet available in EKS.
