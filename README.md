@@ -72,37 +72,4 @@ You should see something like this:
 
 ![operatordeployed](/images/operatordeployed.png)
 
-Currently the operator never achieves "available" status.  We're working with AWS to understand why.
-
-## Deploying a Couchbase Cluster
-
-We're there!  Time to get a live cluster.  Run this:
-
-    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/secret.yaml
-    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/couchbase-cluster.yaml
-
-That should give this:
-
-![couchbasecreated](/images/couchbasecreated.png)
-
-You can view the Couchbase and operator pods by running:
-
-    kubectl get pods
-
-## Accessing the Couchbase Web UI
-
-You've now got a cluster.  But to use it you probably want to set up port forwarding.  To do that run:
-
-    kubectl port-forward cb-example-0000 8091:8091
-
-Leave that command running:
-
-![portforward](/images/portforward.png)
-
-Now open up a browser to http://localhost:8091
-
-![loginscreen](/images/loginscreen.png)
-
-The username is `Administrator` and password is `password`.  And now you're in!
-
-![webui](/images/webui.png)
+Currently the operator never achieves "available" status.  We're working with AWS to understand why.  For now the tutorial ends here.
