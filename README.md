@@ -46,14 +46,33 @@ Finally, you should be able to run your kubectl and see some nodes:
 
 Once you have an EKS cluster deployed and a running kubectl, you're ready to deploy the Operator.  The documentation on that is [here](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html).
 
-To create the deployment and check it deployed, run this:
+To create the deployment, get a local copy of the operator.yaml by running:
 
-    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
+    wget https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
+
+Using your favorite text editor, add this line under env.  This will tell your nodes to request the EKS endpoint rather than the internal IP of the Kubernetes cluster.  (why is this necessary, shouldn't the internal IP be routable?)
+
+    - name: KUBERNETES_SERVICE_HOST
+      value: <your AKS endpoint>
+
+That should give you something like:
+
+![editoperatoryaml](/images/editoperatoryaml.png)
+
+Now add permission to system:serviceaccount:kube-system:default
+
+    kubectl create clusterrolebinding --user system:serviceaccount:kube-system:default kube-system-cluster-admin --clusterrole cluster-admin
+
+We're ready to create the deployment:
+
+    kubectl create -f operator.yaml
     kubectl get deployments
 
 You should see something like this:
 
 ![operatordeployed](/images/operatordeployed.png)
+
+Currently the operator never achieves "available" status.  We're working with AWS to understand why.
 
 ## Deploying a Couchbase Cluster
 
