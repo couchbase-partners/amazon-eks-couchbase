@@ -1,4 +1,4 @@
-# Currently this doesn't work!
+# Currently this doesn't work!  It needs another run through now that EKS is conformant.
 
 # amazon-eks-couchbase
 
@@ -12,11 +12,11 @@ To get started, download the following documentation:
 
     aws s3 cp s3://amazon-eks-docs/EKSDocs.zip .
 
-The zip file is password protected.  If you're a Couchbase employee, ping Ben Lackey for the password.
+The zip file is password protected.  The password is 98c56b357.
 
 To follow along for updates to the documentation, you can subscribe to the following SNS topic arn:
 
-    ​arn:aws:sns:us-west-2:602401143452:eks-docs-update
+    ​​arn:aws:sns:us-west-2:602401143452:eks-docs-update
 
 Additionally, there's a Slack channel for EKS preview participants.  If you're a Couchbase employee and want added to it, let Ben know and he can get you added.
 
