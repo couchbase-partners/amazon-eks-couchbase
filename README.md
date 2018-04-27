@@ -209,7 +209,7 @@ The Couchbase Operator is all set to manage Couchbase clusters.  We create a Cou
 
 We should be able to see something like this:
 
-![couchbasecreated](/images/EKS_kubectl_get_deployments.png)
+![couchbasecreated](/images/EKS_couchbase_created.png)
 
 We can view the all of the pods by running:
 
@@ -232,7 +232,7 @@ We need to make sure we leave the command running in the terminal:
 
 Now we can open up a browser at http://localhost:8091
 
-![loginscreen](/images/GKE_loginscreen.png)
+![loginscreen](/images/EKS_login.png)
 
 We will login using username=`Administrator` and password=`password`.
 
