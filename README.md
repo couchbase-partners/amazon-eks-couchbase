@@ -228,7 +228,7 @@ We do that with the kubectl command:
 
 We need to make sure we leave the command running in the terminal:
 
-![portforward](/images/GKE_port_forward.png)
+![portforward](/images/EKS_kubectl_port_forward.png)
 
 Now we can open up a browser at http://localhost:8091
 
@@ -236,7 +236,9 @@ Now we can open up a browser at http://localhost:8091
 
 We will login using username=`Administrator` and password=`password`.
 
-We are in! Click the 'Servers' link on the left side and we should see our clusters running.
+We are in!
+
+Click the 'Servers' link on the left side and we should see our clusters running.
 
 ![webui](/images/EKS_webui.png)
 
