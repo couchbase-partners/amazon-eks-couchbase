@@ -41,11 +41,14 @@ Unzip EKSDocs.zip and then untar and unzip the userguide.tar.gz:
 The instructions we will use can be found at EKSDocs/userguide/getting-started.html:
 ![userguidhtml](/images/EKS_getting_started.png)
 
+When we have completed the getting started steps we would should be at the point illustrated below:
+![kubectlwatching](/images/EKS_kubectl_watch.png)
+
 #### Validate the EKS setup
 
 After following the userguide we should have two stacks [deployed](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2):
 
-![cloudformation](/images/cloudformation.png)
+![cloudformation](/images/EKS_two_stacks.png)
 
 We should also have a cluster in [EKS](https://console.aws.amazon.com/eks/home?region=us-west-2):
 
@@ -83,8 +86,8 @@ That should give you something like:
 
 Next we deploy the Couchbase Operator with:
 
-    kubectl create -f ~/operator.yaml
-
+![operatorcreated](/images/EKS_kubectl_operator_created.png)
+EKS_kubectl_operator_created.png
 The Couchbase Operator is deployed.  Now we verify it by running:
 
     kubectl get deployments
@@ -193,6 +196,8 @@ Now we can run the command using that file. Remember this is creating the Cluste
 
     kubectl apply -f clusterrole-couchbase-operator.yaml
 
+![rbacsetup](/images/EKS_rbac.png)
+
 ### Deploying a Couchbase Cluster
 
 The Couchbase Operator is all set to manage Couchbase clusters.  We create a Couchbase cluster with the following commands:
@@ -208,7 +213,7 @@ We can view the all of the pods by running:
 
     kubectl get pods
 
-![getpods](/images/EKS_kubectl_get_pods.png)
+![getpodscluster](/images/EKS_kubectl_get_pods_cluster.png)
 
 #### Accessing the Couchbase Web UI
 
