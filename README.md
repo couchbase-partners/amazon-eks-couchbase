@@ -86,6 +86,8 @@ That should give you something like:
 
 Next we deploy the Couchbase Operator with:
 
+    kubectl apply -f ~/operator.yaml
+
 ![operatorcreated](/images/EKS_kubectl_operator_created.png)
 
 The Couchbase Operator is deployed.  Now we verify it by running:
