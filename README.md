@@ -33,7 +33,7 @@ We will be deploying the Couchbase Operator and a Couchbase cluster so we can ig
 
 To get started, download the documentation (the password is **98c56b357**):
 
-```aws s3 cp s3://amazon-eks-docs/EKSDocs.zip .```
+    aws s3 cp s3://amazon-eks-docs/EKSDocs.zip .
 
 Unzip EKSDocs.zip and then untar and unzip the userguide.tar.gz:
 ![userguidetar](/images/EKS_userguide_tar.png)
@@ -58,7 +58,7 @@ Let's verify our setup by checking our nodes using kubectl.
 
 Run the command:
 
-```kubectl get nodes```
+    kubectl get nodes
 
 ![kubectl](/images/EKS_kubectl_get_nodes.png)
 
@@ -202,8 +202,8 @@ Now we can run the command using that file. Remember this is creating the Cluste
 
 The Couchbase Operator is all set to manage Couchbase clusters.  We create a Couchbase cluster with the following commands:
 
-    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/secret.yaml
-    kubectl create -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/couchbase-cluster.yaml
+    kubectl apply -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/secret.yaml
+    kubectl apply -f https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/couchbase-cluster.yaml
 
 We should be able to see something like this:
 
