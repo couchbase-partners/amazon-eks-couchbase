@@ -12,34 +12,23 @@ Here is a summary of EKS:
 
 >Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to install and operate your own Kubernetes clusters
 
-## EKS is in preview so...
+## Major steps of this walkthrough
 
-Amazon Elastic Container Service for Kubernetes EKS is currently in preview.  In order to use it your account must be whitelisted.  Additionally, there's a Slack channel for EKS preview participants.  If you're a Couchbase employee and want to join, let Ben know and he can get you added.
+It may feel like there is alot going on here, but we can break the tasks into palatable parts.  The three major parts of this walkthrough are:
 
-Be sure to keep the documentation (EKSDocs.zip that will be referenced in the next section) up to date, this may help you troubleshoot issues that may arise.
+1. Create an EKS cluster ([userguide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html))
+2. Deploy the Couchbase Operator
+3. Create a Couchbase cluster
 
-For our walkthrough there are three major steps.
-
-1. Create an EKS cluster
-2. Deploying the Couchbase Operator
-3. Create a Couchbase cluster 
+Now let's tackle each section.
 
 ### Create an EKS Cluster
 
-Amazon has provided some quality documentation, on how to setup your environment and how to create an EKS cluster.  We will leverage that documentation for our purposes.
-Follow the guide until you have kubectl installed, a vpc, a cluster and worker nodes deployed. Don't deploy the DNS add on as that seems to cause problems.
+Amazon has provided some quality documentation on setting up your environment and creating an EKS cluster.  We will leverage that documentation for our purposes.
 
-We will be deploying the Couchbase Operator and a Couchbase cluster so we can ignore Step 4, setting up the Guest Book sample application.
+Follow the [userguide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html), completing steps up to "__*Step 3: Launch and Configure Amazon EKS Worker Nodes*__".
 
-To get started, download the documentation (the password is **98c56b357**):
-
-    aws s3 cp s3://amazon-eks-docs/EKSDocs.zip .
-
-Unzip EKSDocs.zip and then untar and unzip the userguide.tar.gz:
-![userguidetar](/images/EKS_userguide_tar.png)
-
-The instructions we will use can be found at EKSDocs/userguide/getting-started.html:
-![userguidhtml](/images/EKS_getting_started.png)
+We will be deploying the Couchbase Operator and a Couchbase cluster so we can ignore "Step 4: "Launch a Guest Book Application".
 
 When we have completed the getting started steps we would should be at the point illustrated below:
 ![kubectlwatching](/images/EKS_kubectl_watch.png)
@@ -62,44 +51,10 @@ Run the command:
 
 ![kubectl](/images/EKS_kubectl_get_nodes.png)
 
-### Deploying the Operator
-
-Once you have an EKS cluster deployed and a running kubectl, you're ready to deploy the Operator.  The documentation on that is [here](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html).
-Now that we have all the environment prerequisites in place, we are ready to deploy the Couchbase Operator.
-
-In preparation for creating the deployment change to your home directory:
-
-    cd ~
-
-Now we get a local copy of the operator.yaml by running:
-
-    curl -O  https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
-
-Using your favorite text editor, add this line under env.  This will tell your nodes to request the EKS endpoint rather than the internal IP of the Kubernetes cluster.
-
-    - name: KUBERNETES_SERVICE_HOST
-      value: <your AKS endpoint>
-
-That should give you something like:
-
-![editoperatoryaml](/images/EKS_operator_yaml_edit.png)
-
-Next we deploy the Couchbase Operator with:
-
-    kubectl apply -f ~/operator.yaml
-
-![operatorcreated](/images/EKS_kubectl_operator_created.png)
-
-The Couchbase Operator is deployed.  Now we verify it by running:
-
-    kubectl get deployments
-
-![operatordeployed](/images/EKS_kubectl_get_deployments.png)
-
 ### Role-based Access Control (RBAC)
 
 #### Foundational Knowledge
-Kubernetes uses RBAC which gives us flexibility on how our pods are controlled.  For those that are not familiar with RBAC I will break down the the concepts that are important for our walkthrough.
+Kubernetes uses RBAC which gives us flexibility on who and how our pods are controlled.  For those that are not familiar with RBAC let's break down the the concepts that are important for our walkthrough.
 
 The first concept will cover is the **_service account_** (as explained by Kubermetes):
 >A service account provides an identity for processes that run in a Pod.
@@ -199,6 +154,37 @@ Now we can run the command using that file. Remember this is creating the Cluste
     kubectl apply -f clusterrole-couchbase-operator.yaml
 
 ![rbacsetup](/images/EKS_rbac.png)
+
+### Deploy the Couchbase Operator
+
+Now that we have setup RBAC, we are finally ready to deploy the Couchbase Operator (which will manage our Couchbase clusters).  I wont go into the details of the Couchbase Operator here, but If you are interested in learning more you may find this [overview](http://docs.couchbase.com/prerelease/couchbase-operator/beta/overview.html) as a good starting point.
+
+Continuing on...  Grab a local copy of the operator.yaml by running:
+
+    curl -O  https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
+
+Using your favorite text editor, add this line under env.  This will tell your nodes to request the EKS endpoint rather than the internal IP of the Kubernetes cluster.
+
+    - name: KUBERNETES_SERVICE_HOST
+      value: <your EKS endpoint>
+
+Be sure to remove the __*https://*__ if you are copying the 'value' from the console.
+
+Your file should be similar to the following:
+
+![editoperatoryaml](/images/EKS_operator_yaml_edit.png)
+
+Next we deploy the Couchbase Operator with:
+
+    kubectl apply -f ~/operator.yaml
+
+![operatorcreated](/images/EKS_kubectl_operator_created.png)
+
+The Couchbase Operator is deployed.  Now we verify it by running:
+
+    kubectl get deployments
+
+![operatordeployed](/images/EKS_kubectl_get_deployments.png)
 
 ### Deploying a Couchbase Cluster
 
