@@ -77,7 +77,7 @@ In order for the Couchbase Operator to be able to create resources within our Ku
 2. Create a clusterRole (or use an existing one)
 3. Bind clusterRole(s) to the ServiceAccount
 
-OK now let's create a new Service Account.
+OK now let's create a new Service Account called couchbase-operator in the default [namespace](https://kubernetes.io/docs/tasks/administer-cluster/namespaces-walkthrough/#step-one-understand-the-default-namespace).
 
 Create a file called **serviceaccount-couchbase-operator.yaml** with the contents below:
 
@@ -163,14 +163,23 @@ Continuing on...  Grab a local copy of the operator.yaml by running:
 
     curl -O  https://s3.amazonaws.com/packages.couchbase.com/kubernetes/beta/operator.yaml
 
-Using your favorite text editor, add this line under env.  This will tell your nodes to request the EKS endpoint rather than the internal IP of the Kubernetes cluster.
+Using your favorite text editor make two changes to the file.  
+
+First add this line under spec:
+
+    spec:
+      serviceAccountName: couchbase-operator
+
+Now add the following under env (remove the __*https://*__ if you are copying the endpoint text from the console):
 
     - name: KUBERNETES_SERVICE_HOST
       value: <your EKS endpoint>
 
-Be sure to remove the __*https://*__ if you are copying the 'value' from the console.
+This indicates you want to use the service Account couchbase-operator we created earlier;  also it tells your nodes to request the EKS endpoint rather than the internal IP of the Kubernetes cluster.
 
-Your file should be similar to the following:
+
+
+Your file should look similar to the following:
 
 ![editoperatoryaml](/images/EKS_operator_yaml_edit.png)
 
